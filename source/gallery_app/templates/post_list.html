@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block titleblock %}
+    Posts
+{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        {% if posts %}
+            {% for post in posts %}
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="card mb-3">
+                            <div class="card-header border border-0 bg-white">
+                                <img class="rounded-circle post-profile-image"
+                                     src="{{ post.user.profile.profile_pic.url }}" alt="">
+                                <a class="text-muted link-underline link-underline-opacity-0"
+                                   href="{% url 'profile' post.author.id %}"><strong>{{ post.author.username|lower }}</strong></a>
+                            </div>
+                            <img class="card-img-top" src="{% if post.get_image_url %}
+                            {{ post.get_image_url }}
+                            {% else %}
+                            /uploads/img/grey_background.jpg
+                            {% endif %}" alt="{{ post.author }}" style="width: 100%; height: 340px; object-fit: cover;">
+                            <div class="card-body">
+                                <div class="row align-items-start">
+                                    <div class="col-6">
+                                        {% if user.is_authenticated %}
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                {% if request.user in post.likes.all %}
+                                                    <form method="POST" action="{% url 'unlike_post' post.pk %}">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-link text-muted">
+                                                            <iconify-icon icon="mdi:cards-heart" width="30"
+                                                                          height="30"></iconify-icon>
+                                                        </button>
+                                                    </form>
+                                                {% else %}
+                                                    <form method="POST" action="{% url 'like_post' post.pk %}">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-link text-muted">
+                                                            <iconify-icon icon="mdi:cards-heart-outline" width="30"
+                                                                          height="30"></iconify-icon>
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
+                                                <a href="{% url 'post_detail' post.id %}" class="text-muted">
+                                                    <iconify-icon
+                                                            icon="material-symbols:chat-bubble-outline" width="30"
+                                                            height="30"></iconify-icon>
+                                                </a>
+                                            </div>
+                                        {% else %}
+                                            <a href="{% url 'login' %}" class="btn btn-link"><i
+                                                    class="far fa-heart fa-lg"></i></a>
+                                        {% endif %}
+                                        <p>
+                                            <strong><a class="text-dark link-underline link-underline-opacity-0"
+                                                       href="{% url 'profile' post.author.id %}">{{ post.author.username }}</a></strong> {{ post.body }}
+                                        </p>
+                                        {% for comment in post.comments.all %}
+                                            <p class="card-text">
+                                                <strong><a class="text-dark link-underline link-underline-opacity-0"
+                                                           href="{% url 'profile' comment.author.id %}">{{ comment.author.username }}</a></strong> {{ comment.text }}
+                                            </p>
+                                        {% endfor %}
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <small class="text-muted">{{ post.likes.count }} likes</small>
+                                                    <p class="card-text"><small
+                                                            class="text-muted">{{ post.created_at|timesince }}
+                                                        ago</small>
+                                                    </p>
+                                                </div>
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    {% if request.user.id == post.author.id %}
+                                                        <a href="{% url 'post_update' post.id %}"
+                                                           class="btn btn-link text-muted">
+                                                            <iconify-icon icon="material-symbols:edit"></iconify-icon>
+                                                        </a>
+                                                        <a href="{% url 'post_delete' post.id %}"
+                                                           class="btn btn-link text-muted">
+                                                            <iconify-icon
+                                                                    icon="material-symbols:delete-forever-outline"></iconify-icon>
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
