@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titleblock %}Profiles{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+        <h1>Hi</h1>
+        <hr>
+        {% if profiles %}
+            {% for profile in profiles %}
+                Username: {{ profile.user.username }}
+                <br>
+                Link: @{{ profile.user.username|lower }}
+                <br>
+                Last Updated: {{ profile.updated_at|timesince }}
+                <hr>
+            {% endfor %}
+        {% endif %}
+    {% endblock %}
+</body>
+</html>

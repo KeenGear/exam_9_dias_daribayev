@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
@@ -22,3 +22,13 @@ class PostForm(forms.ModelForm):
         elif not image.content_type.startswith('image/'):
             raise forms.ValidationError('Invalid file format. Only image files are allowed.')
         return image
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text', 'image']
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write a text...'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+        }
