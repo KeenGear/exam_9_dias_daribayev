@@ -4,7 +4,15 @@
 }
 
 .card-img-top {
-    width: 100%;!important;
-    height: 340px;!important;
-    object-fit: cover;!important;
+    width: 100%;
+!important;
+    height: 340px;
+!important;
+    object-fit: cover;
+!important;
+}
+
+
+.profile-img-custom {
+    height: 150px;
 }

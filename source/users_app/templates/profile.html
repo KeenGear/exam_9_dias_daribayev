@@ -7,7 +7,7 @@
                 <img src="{% if profile.profile_pic %}
                             {{ profile.profile_pic.url }}
                              {% else %}/static/img/default-profile-picture.jpg{% endif %}"
-                     class="rounded-circle" style="height: 150px;" alt="{{ profile.user.username }}">
+                     class="rounded-circle profile-img-custom" alt="{{ profile.user.username }}">
             </div>
             <div class="col-9 pt-5">
                 <div class="p-2 d-flex align-content-center">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="d-flex flex-row">
                     <div class="p-2"><strong>{{ profile.user.posts.count }}</strong> posts</div>
-                    <div class="p-2"><strong>{{ profile.user.favorite.count }}</strong> favorites</div>
+                    <div class="p-2"><strong>{{ profile.favorite.count }}</strong> favorites</div>
                 </div>
                 <div class="d-flex flex-row">
                     <div class="p-2 font-weight-bold">
@@ -31,9 +31,6 @@
                     <div class="p-2">
                         <span>{{ profile.user.email }}</span>
                     </div>
-                </div>
-                <div class="d-flex flex-row">
-                    <p class="p-2">{{ profile.bio }}</p>
                 </div>
             </div>
         </div>
