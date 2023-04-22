@@ -1,0 +1,53 @@
+[
+{
+    "model": "gallery_app.post",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "text": "Testing Post",
+        "image": "uploads/user_1/pexels-polina-kovaleva-5546810.jpg",
+        "created_at": "2023-04-22T06:20:23.721Z",
+        "author": 1,
+        "favorite": [
+            1
+        ]
+    }
+},
+{
+    "model": "gallery_app.post",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "text": "Kenny's test post",
+        "image": "uploads/user_2/pexels-aliona-zueva-10648716.jpg",
+        "created_at": "2023-04-22T08:04:03.710Z",
+        "author": 2,
+        "favorite": []
+    }
+},
+{
+    "model": "gallery_app.post",
+    "pk": 3,
+    "fields": {
+        "user": 1,
+        "text": "asdasdasd",
+        "image": "uploads/user_1/pexels-pixabay-532001.jpg",
+        "created_at": "2023-04-22T09:42:11.862Z",
+        "author": 1,
+        "favorite": [
+            1
+        ]
+    }
+},
+{
+    "model": "gallery_app.comment",
+    "pk": 1,
+    "fields": {
+        "post": 2,
+        "author": 1,
+        "image": "",
+        "text": "OPOPS",
+        "created_at": "2023-04-22T09:29:40.983Z"
+    }
+}
+]

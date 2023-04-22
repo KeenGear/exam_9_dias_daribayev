@@ -1,0 +1,36 @@
+[
+{
+    "model": "users_app.profile",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "updated_at": "2023-04-22T06:40:55.841Z",
+        "profile_pic": "uploads/user_profiles/user_1/pexels-efe-ersoy-16447264.jpg",
+        "follows": []
+    }
+},
+{
+    "model": "users_app.profile",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "updated_at": "2023-04-22T08:11:13.315Z",
+        "profile_pic": "uploads/user_profiles/user_2/kennyOverlay_4187252f-a636-4aa2-a28e-42e6916b144b_1980x.png",
+        "follows": [
+            2
+        ]
+    }
+},
+{
+    "model": "users_app.profile",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "updated_at": "2023-04-22T08:15:13.864Z",
+        "profile_pic": "static/img/user_pic.jpeg",
+        "follows": [
+            3
+        ]
+    }
+}
+]
