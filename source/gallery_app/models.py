@@ -24,3 +24,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
