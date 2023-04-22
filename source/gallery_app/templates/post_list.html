@@ -13,20 +13,20 @@
                                 <img class="rounded-circle post-profile-image"
                                      src="{{ post.user.profile.profile_pic.url }}" alt="">
                                 <a class="text-muted link-underline link-underline-opacity-0"
-                                   href="#"><strong>{{ post.author.username|lower }}</strong></a>
+                                   href="{% url 'profile' post.author.id %}"><strong>{{ post.author.username|lower }}</strong></a>
                             </div>
                             <img class="card-img-top" src="{% if post.get_image_url %}
                             {{ post.get_image_url }}
                             {% else %}
-                            /uploads/img/grey_background.jpg
-                            {% endif %}" alt="{{ post.author }}" style="width: 100%; height: 340px; object-fit: cover;">
+                            /static/img/grey_background.jpg
+                            {% endif %}" alt="{{ post.author }}">
                             <div class="card-body">
                                 <div class="row align-items-start">
                                     <div class="col-6">
                                         {% if user.is_authenticated %}
                                             <div class="d-flex justify-content-start align-items-center">
                                                 {% if request.user in post.likes.all %}
-                                                    <form method="POST" action="#">
+                                                    <form method="POST" action="{% url 'remove_favirite' post.pk %}">
                                                         {% csrf_token %}
                                                         <button type="submit" class="btn btn-link text-muted">
                                                             <iconify-icon icon="mdi:cards-heart" width="30"
@@ -34,7 +34,7 @@
                                                         </button>
                                                     </form>
                                                 {% else %}
-                                                    <form method="POST" action="#">
+                                                    <form method="POST" action="{% url 'add_favorite' post.pk %}">
                                                         {% csrf_token %}
                                                         <button type="submit" class="btn btn-link text-muted">
                                                             <iconify-icon icon="mdi:cards-heart-outline" width="30"
@@ -42,7 +42,7 @@
                                                         </button>
                                                     </form>
                                                 {% endif %}
-                                                <a href="#" class="text-muted">
+                                                <a href="{% url 'post_detail' post.id %}" class="text-muted">
                                                     <iconify-icon
                                                             icon="material-symbols:chat-bubble-outline" width="30"
                                                             height="30"></iconify-icon>
@@ -54,7 +54,7 @@
                                         {% endif %}
                                         <p>
                                             <strong><a class="text-dark link-underline link-underline-opacity-0"
-                                                       href="#">{{ post.author.username }}</a></strong> {{ post.text }}
+                                                       href="{% url 'profile' post.author.id %}">{{ post.author.username }}</a></strong> {{ post.text }}
                                         </p>
                                         {% for comment in post.comments.all %}
                                             <p class="card-text">

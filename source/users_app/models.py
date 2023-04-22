@@ -1,5 +1,4 @@
 import os
-
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -17,7 +16,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     follows = models.ManyToManyField('self', related_name='followed_by', symmetrical=False, blank=True)
     updated_at = models.DateTimeField(User, auto_now=True)
-    profile_pic = models.ImageField(null=True, blank=True, upload_to=upload_to, verbose_name='profile_pic')
+    profile_pic = models.ImageField(null=True, blank=True, upload_to=upload_to, verbose_name='profile_pic', default='static/img/user_pic.jpeg')
 
     def __str__(self):
         return f'{self.user.username}'

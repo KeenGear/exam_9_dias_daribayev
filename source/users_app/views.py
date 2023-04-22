@@ -7,10 +7,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import UpdateView
-
 from .models import Profile
 from .forms import UserForm, ProfilePicForm
-from insta_app.models import Post
+from gallery_app.models import Post
 
 
 class ProfileListView(LoginRequiredMixin, View):
@@ -47,7 +46,7 @@ class ProfileView(LoginRequiredMixin, View):
 class RegisterUserView(View):
     def get(self, request):
         form = UserForm()
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'registration/register.html', {'form': form})
 
     def post(self, request):
         form = UserForm(request.POST)
@@ -59,7 +58,7 @@ class RegisterUserView(View):
             login(request, user)
             messages.success(request, "You've registered")
             return redirect('post_list')
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'registration/register.html', {'form': form})
 
 
 class UpdateUserView(LoginRequiredMixin, UpdateView):

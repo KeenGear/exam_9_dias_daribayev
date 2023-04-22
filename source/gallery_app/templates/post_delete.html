@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <div class="card d-flex" style="width: 118rem;">
+      <div class="card-body">
+          <h5 class="card-title">Delete Post</h5>
+          <p class="card-text">Вы уверены?</p>
+          <form method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Да</button>
+              <a href="{% url 'post_list' %}" class="btn btn-secondary">Нет</a>
+          </form>
+      </div>
+    </div>
+{% endblock %}

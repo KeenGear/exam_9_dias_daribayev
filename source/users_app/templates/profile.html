@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block titleblock %}{{ profile.user.username }}{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-3 p-5">
+                <img src="{% if profile.profile_pic %}
+                            {{ profile.profile_pic.url }}
+                             {% else %}/static/img/default-profile-picture.jpg{% endif %}"
+                     class="rounded-circle" style="height: 150px;" alt="{{ profile.user.username }}">
+            </div>
+            <div class="col-9 pt-5">
+                <div class="p-2 d-flex align-content-center">
+                    <h1>{{ profile.user.username }}</h1>
+                    <div class="p-2 mt-1">
+                        {% if request.user.id == profile.user.id %}
+                            <a type="button" href="{% url 'logout' %}" class="btn btn-outline-secondary">
+                                <iconify-icon icon="teenyicons:logout-solid"></iconify-icon>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-2"><strong>{{ profile.user.posts.count }}</strong> posts</div>
+                    <div class="p-2"><strong>{{ profile.posts.favorite.all.count }}</strong> followers</div>
+                    <div class="p-2"><strong>{{ profile.follows.all.count }}</strong> following</div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-2 font-weight-bold">
+                        <strong>{{ profile.user.first_name|capfirst }}.{{ profile.user.last_name|slice:":1"|upper }}</strong>
+                    </div>
+                    <div class="p-2">
+                        <span>{{ profile.user.email }}</span>
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <p class="p-2">{{ profile.bio }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-5">
+            {% for post in posts %}
+                {% if post.author.id == profile.user.id %}
+                    <div class="col-4 g-5">
+                        <div class="post-wrapper">
+                            <img src="{{ post.image.url }}" class="w-100 h-75 post-image">
+                            <div class="overlay">
+                                <p class="post-body">{{ post.likes.count }}</p>
+                                <p class="post-body-2">{{ post.comments.count }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+                <p>No posts found.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
