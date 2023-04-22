@@ -25,8 +25,8 @@
                                     <div class="col-6">
                                         {% if user.is_authenticated %}
                                             <div class="d-flex justify-content-start align-items-center">
-                                                {% if request.user in post.likes.all %}
-                                                    <form method="POST" action="{% url 'remove_favirite' post.pk %}">
+                                                {% if request.user in post.favorite.all %}
+                                                    <form method="POST" action="{% url 'remove_favorite' post.pk %}">
                                                         {% csrf_token %}
                                                         <button type="submit" class="btn btn-link text-muted">
                                                             <iconify-icon icon="mdi:cards-heart" width="30"

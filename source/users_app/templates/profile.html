@@ -22,8 +22,7 @@
                 </div>
                 <div class="d-flex flex-row">
                     <div class="p-2"><strong>{{ profile.user.posts.count }}</strong> posts</div>
-                    <div class="p-2"><strong>{{ profile.posts.favorite.all.count }}</strong> followers</div>
-                    <div class="p-2"><strong>{{ profile.follows.all.count }}</strong> following</div>
+                    <div class="p-2"><strong>{{ profile.user.favorite.count }}</strong> favorites</div>
                 </div>
                 <div class="d-flex flex-row">
                     <div class="p-2 font-weight-bold">
@@ -40,12 +39,12 @@
         </div>
         <div class="row pt-5">
             {% for post in posts %}
-                {% if post.author.id == profile.user.id %}
+                {% if profile.user in post.favorite.all %}
                     <div class="col-4 g-5">
                         <div class="post-wrapper">
                             <img src="{{ post.image.url }}" class="w-100 h-75 post-image">
                             <div class="overlay">
-                                <p class="post-body">{{ post.likes.count }}</p>
+                                <p class="post-body">{{ post.favorite.count }}</p>
                                 <p class="post-body-2">{{ post.comments.count }}</p>
                             </div>
                         </div>
